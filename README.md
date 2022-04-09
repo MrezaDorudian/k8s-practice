@@ -48,12 +48,12 @@ now to test the service, we make another pod with curl-alpine image and run it o
 then with the curl command we can test it.  
 get ip address or name of the service:  
 `kubectl get svc -o wide`
-then `kubectl run -it --rm curl-test --image=elmo4679/curl-alpine /bin/bash`
+then `kubectl run -it --rm curl-test --image=elmo4679/curl-alpine`
 
 now with the bash we can test the service:  
-`bash-5.1# curl http://{IP address result of previous command}:8080/tehran`  
+`bash-5.1# curl http://{IP address result of previous command}/tehran`  
 or  
-`bash-5.1# curl weather-app-service:8080/tehran`
+`bash-5.1# curl weather-app-service/tehran`
 
 
 
