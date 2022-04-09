@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: weather-app
+  labels:
+    app: weather-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: weather-app
+  template:
+    metadata:
+      labels:
+        app: weather-app
+    spec:
+      containers:
+        - image: elmo4679/weather-app
+          name: weather-app
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: config-map
+              mountPath: /app/config.json
+              subPath: config.json
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /healthz
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /healthz
+      volumes:
+        - name: config-map
+          configMap:
+            name: weather-app-config
